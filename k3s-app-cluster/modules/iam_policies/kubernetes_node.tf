@@ -1,7 +1,8 @@
-data "aws_iam_policy_document" "k3s_node_full" {
-  # https://kubernetes.github.io/cloud-provider-aws/prerequisites.html
+# https://kubernetes.github.io/cloud-provider-aws/prerequisites.html
+#
+data "aws_iam_policy_document" "k8s_node_full" {
   statement {
-    sid    = "K3sNodePolicyFull"
+    sid    = "KubernetesNodePolicyFull"
     effect = "Allow"
 
     actions = [
@@ -22,10 +23,9 @@ data "aws_iam_policy_document" "k3s_node_full" {
   }
 }
 
-data "aws_iam_policy_document" "k3s_node_minimal" {
-  # https://kubernetes.github.io/cloud-provider-aws/prerequisites.html
+data "aws_iam_policy_document" "k8s_node_minimal" {
   statement {
-    sid    = "K3sNodePolicyMinimal"
+    sid    = "KubernetesNodePolicyMinimal"
     effect = "Allow"
 
     actions = [
@@ -37,4 +37,12 @@ data "aws_iam_policy_document" "k3s_node_minimal" {
       "*"
     ]
   }
+}
+
+resource "aws_iam_policy" "k8s_node_full" {
+  policy = data.aws_iam_policy_document.k8s_node_full.json
+}
+
+resource "aws_iam_policy" "k8s_node_minimal" {
+  policy = data.aws_iam_policy_document.k8s_node_minimal.json
 }

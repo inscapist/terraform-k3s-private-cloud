@@ -1,10 +1,11 @@
-data "aws_iam_policy_document" "k3s_master_policy_full" {
-  # https://kubernetes.github.io/cloud-provider-aws/prerequisites.html
-  #
-  # K3s is a bare metal distro of kubernetes
-  # In order to talk to AWS API, CCM must be granted these permissions
+# https://kubernetes.github.io/cloud-provider-aws/prerequisites.html
+#
+# In order to talk to AWS API, CCM must be granted these permissions
+# This is especially needed by k3s, since k3s is just a bare metal distro
+#
+data "aws_iam_policy_document" "k8s_master_full" {
   statement {
-    sid    = "K3sCloudControllerMgrPolicyFull"
+    sid    = "KubernetesCloudControllerMgrPolicyFull"
     effect = "Allow"
 
     actions = [
@@ -69,4 +70,8 @@ data "aws_iam_policy_document" "k3s_master_policy_full" {
       "*"
     ]
   }
+}
+
+resource "aws_iam_policy" "k8s_master_full" {
+  policy = data.aws_iam_policy_document.k8s_master_full.json
 }

@@ -2,9 +2,6 @@
 #
 data "aws_iam_policy_document" "k8s_node_full" {
   statement {
-    sid    = "KubernetesNodePolicyFull"
-    effect = "Allow"
-
     actions = [
       "ec2:DescribeInstances",
       "ec2:DescribeRegions",
@@ -25,9 +22,6 @@ data "aws_iam_policy_document" "k8s_node_full" {
 
 data "aws_iam_policy_document" "k8s_node_minimal" {
   statement {
-    sid    = "KubernetesNodePolicyMinimal"
-    effect = "Allow"
-
     actions = [
       "ec2:DescribeInstances",
       "ec2:DescribeRegions",

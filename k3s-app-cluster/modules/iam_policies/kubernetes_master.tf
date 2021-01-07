@@ -5,9 +5,6 @@
 #
 data "aws_iam_policy_document" "k8s_master_full" {
   statement {
-    sid    = "KubernetesCloudControllerMgrPolicyFull"
-    effect = "Allow"
-
     actions = [
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeLaunchConfigurations",

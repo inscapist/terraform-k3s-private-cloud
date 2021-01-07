@@ -1,7 +1,6 @@
 # README
 # https://aws.amazon.com/premiumsupport/knowledge-center/eks-vpc-subnet-discovery/
 
-
 resource "aws_ec2_tag" "assoc_subnet_with_cluster" {
   # Associate subnets with kubernetes cluster
   for_each    = data.aws_subnet_ids.default.ids

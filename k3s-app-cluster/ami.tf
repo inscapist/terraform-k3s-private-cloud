@@ -1,5 +1,5 @@
 # we choose ubuntu because it is the most friendly and platform neutral
-data "aws_ami" "amazon_linux" {
+data "aws_ami" "ubuntu_focal" {
   most_recent = true
   owners      = ["099720109477"] # Canonical
 

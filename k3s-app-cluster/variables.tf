@@ -15,3 +15,21 @@ variable "master_instance_type" {
   description = "Instance size for master node"
   default     = "t4g.medium" # 1vcpu, 4GB memory
 }
+
+variable "extra_master_security_groups" {
+  default     = []
+  type        = list(any)
+  description = "Additional security groups to attach to k3s server instances"
+}
+
+variable "extra_node_security_groups" {
+  default     = []
+  type        = list(any)
+  description = "Additional security groups to attach to k3s agent instances"
+}
+
+variable "subnets" {
+  default     = []
+  type        = list(any)
+  description = "List of subnet ids to use"
+}

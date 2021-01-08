@@ -24,3 +24,14 @@ resource "aws_iam_role_policy_attachment" "k3s_master_session_manager" {
   role       = aws_iam_role.k3s_master_role.name
   policy_arn = module.iam_policies.session_manager_arn
 }
+
+# resource "aws_instance" "k3s_master" {
+#   ami                    = data.aws_ami.ubuntu_focal.id
+#   instance_type          = var.master_instance_type
+#   subnet_id              = var.subnet_id
+#   iam_instance_profile   = aws_iam_instance_profile.k3s_master_profile.name
+#   vpc_security_group_ids = flatten([aws_security_group.default.id, var.vpc_security_group_ids])
+
+#   user_data = var.user_data
+#   tags      = merge({ "Name" = var.name }, var.tags)
+# }

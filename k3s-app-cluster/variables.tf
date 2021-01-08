@@ -1,6 +1,9 @@
+variable "vpc_id" {
+  description = "VPC id for this cluster, eg. vpc-xxxxxx"
+}
+
 variable "cluster_name" {
-  description = "Cluster name, in fqdn form"
-  default     = "my.k3s.app"
+  description = "Cluster name, in fqdn form, eg. my.k3s.app"
 }
 
 variable "region" {

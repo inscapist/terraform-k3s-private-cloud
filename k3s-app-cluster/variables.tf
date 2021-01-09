@@ -12,18 +12,18 @@ variable "region" {
 }
 
 variable "master_ami" {
-  description = "AMI for k3s master"
+  description = "AMI for k3s master (defaults to Arm64)"
   default     = null
 }
 
 variable "node_ami" {
-  description = "AMI for k3s node"
+  description = "AMI for k3s node (defaults to Arm64)"
   default     = null
 }
 
 variable "master_instance_type" {
-  description = "Instance size for k3s master"
-  default     = "t4g.medium" # 1vcpu, 4GB memory
+  description = "Instance size for k3s master (defaults to Arm64)"
+  default     = "m6g.medium" # 1vcpu, 4GB memory
 }
 
 variable "extra_master_security_groups" {
@@ -38,8 +38,14 @@ variable "extra_node_security_groups" {
   description = "Additional security groups to attach to k3s agent instances"
 }
 
-variable "subnets" {
+variable "public_subnets" {
   default     = []
   type        = list(any)
-  description = "List of subnet ids to use"
+  description = "List of public subnet ids to use. If blank, infer from VPC"
+}
+
+variable "private_subnets" {
+  default     = []
+  type        = list(any)
+  description = "List of private subnet ids to use. If blank, infer from VPC"
 }

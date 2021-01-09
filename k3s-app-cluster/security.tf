@@ -12,7 +12,7 @@ resource "aws_security_group" "self" {
 }
 
 resource "aws_security_group" "egress" {
-  name        = "${local.name}-self"
+  name        = "${local.name}-egress"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow unbounded egress communication"
 

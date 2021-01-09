@@ -24,8 +24,11 @@ data "aws_subnet_ids" "available" {
 }
 
 locals {
-  name            = var.cluster_name
-  master_image_id = var.master_image_id != null ? var.master_image_id : data.aws_ami.ubuntu_focal.id
-  node_image_id   = var.node_image_id != null ? var.node_image_id : data.aws_ami.ubuntu_focal.id
-  subnets         = length(var.subnets) > 0 ? var.subnets : data.aws_subnet_ids.available.ids
+  name         = var.cluster_name
+  master_count = 1
+  node_count   = 3
+  master_ami   = var.master_ami != null ? var.master_ami : data.aws_ami.ubuntu_focal.id
+  node_ami     = var.node_ami != null ? var.node_ami : data.aws_ami.ubuntu_focal.id
+  master_vol   = 50
+  subnets      = length(var.subnets) > 0 ? var.subnets : data.aws_subnet_ids.available.ids
 }

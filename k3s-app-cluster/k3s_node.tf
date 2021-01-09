@@ -4,13 +4,13 @@
 # (Role + Policy) is bound together by role_policy_attachment
 
 resource "aws_iam_role" "k3s_node_role" {
-  name               = "k3s_node_role-${var.cluster_name}"
+  name               = "k3s_node_role-${local.name}"
   path               = "/"
   assume_role_policy = module.iam_policies.ec2_assume_role
 }
 
 resource "aws_iam_instance_profile" "k3s_node_profile" {
-  name = "k3s_node_instance_profile-${var.cluster_name}"
+  name = "k3s_node_instance_profile-${local.name}"
   role = aws_iam_role.k3s_node_role.name
 }
 

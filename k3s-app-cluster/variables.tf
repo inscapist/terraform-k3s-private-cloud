@@ -11,8 +11,18 @@ variable "region" {
   default     = "ap-southeast-1"
 }
 
+variable "master_ami" {
+  description = "AMI for k3s master"
+  default     = null
+}
+
+variable "node_ami" {
+  description = "AMI for k3s node"
+  default     = null
+}
+
 variable "master_instance_type" {
-  description = "Instance size for master node"
+  description = "Instance size for k3s master"
   default     = "t4g.medium" # 1vcpu, 4GB memory
 }
 

@@ -1,5 +1,5 @@
 resource "aws_security_group" "self" {
-  name        = "${var.cluster-name}-self"
+  name        = "${local.name}-self"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow all members of this SG to inter-communicate"
 
@@ -12,7 +12,7 @@ resource "aws_security_group" "self" {
 }
 
 resource "aws_security_group" "egress" {
-  name        = "${var.cluster-name}-self"
+  name        = "${local.name}-self"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow unbounded egress communication"
 

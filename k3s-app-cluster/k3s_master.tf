@@ -26,12 +26,14 @@ resource "aws_iam_instance_profile" "k3s_master" {
 }
 
 resource "aws_instance" "k3s_master" {
-  count                       = local.master_count
-  ami                         = local.master_ami
-  instance_type               = var.master_instance_type
-  subnet_id                   = local.public_subnets[0]
-  iam_instance_profile        = aws_iam_instance_profile.k3s_master.name
-  associate_public_ip_address = true
+  count                = local.master_count
+  ami                  = local.master_ami
+  instance_type        = var.master_instance_type
+  iam_instance_profile = aws_iam_instance_profile.k3s_master.name
+
+  subnet_id                   = local.private_subnets[0]
+  associate_public_ip_address = false
+
   vpc_security_group_ids = concat([
     aws_security_group.self.id,
     aws_security_group.egress.id

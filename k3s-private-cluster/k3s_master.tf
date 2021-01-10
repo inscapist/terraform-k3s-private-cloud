@@ -4,7 +4,7 @@
 # (Role + Policy) is bound together by role_policy_attachment
 
 resource "aws_iam_role" "k3s_master" {
-  name               = "k3s_master_role-${local.name}"
+  name               = "k3s_master_role-${local.cluster_id}"
   path               = "/"
   assume_role_policy = module.iam_policies.ec2_assume_role
 }
@@ -21,8 +21,16 @@ resource "aws_iam_role_policy_attachment" "k3s_master_session_manager" {
 }
 
 resource "aws_iam_instance_profile" "k3s_master" {
-  name = "k3s_master_instance_profile-${local.name}"
+  name = "k3s_master_instance_profile-${local.cluster_id}"
   role = aws_iam_role.k3s_master.name
+}
+
+module "k3s_master_label" {
+  source  = "cloudposse/label/null"
+  version = "0.22.1"
+
+  name    = "${local.cluster_id}-k3s-master"
+  context = module.this.context
 }
 
 resource "aws_instance" "k3s_master" {
@@ -31,7 +39,7 @@ resource "aws_instance" "k3s_master" {
   instance_type        = var.master_instance_type
   iam_instance_profile = aws_iam_instance_profile.k3s_master.name
 
-  subnet_id                   = local.subnets[0]
+  subnet_id                   = module.subnets.private_subnet_ids[0]
   associate_public_ip_address = false
 
   vpc_security_group_ids = concat([
@@ -45,11 +53,7 @@ resource "aws_instance" "k3s_master" {
   }
 
   # user_data = var.user_data # TODO
-  tags = {
-    Name       = "${local.name}-master"
-    K3sCluster = local.name
-    K3sRole    = "master"
-  }
+  tags = module.k3s_master_label.tags
 
   lifecycle {
     ignore_changes = [

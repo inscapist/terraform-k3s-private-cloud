@@ -11,3 +11,4 @@
 
 - aws-cli ([install](https://aws.amazon.com/cli/))
 - terraform ([install](https://www.terraform.io/downloads.html))
+- [subnet planner](https://network00.com/NetworkTools/IPv4AddressPlanner/)

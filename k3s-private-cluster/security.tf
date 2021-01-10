@@ -1,5 +1,5 @@
 resource "aws_security_group" "self" {
-  name        = "${local.name}-self"
+  name        = "${local.cluster_id}-self"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow all members of this SG to inter-communicate"
 
@@ -9,10 +9,12 @@ resource "aws_security_group" "self" {
     protocol  = "-1"
     self      = true
   }
+
+  tags = module.this.tags
 }
 
 resource "aws_security_group" "egress" {
-  name        = "${local.name}-egress"
+  name        = "${local.cluster_id}-egress"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow unbounded egress communication"
 
@@ -22,5 +24,7 @@ resource "aws_security_group" "egress" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = module.this.tags
 }
 

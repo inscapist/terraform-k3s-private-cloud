@@ -17,6 +17,8 @@
 
 This module is designed for workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway.
 
+If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work
+
 ### Existing VPC
 
 To run this module, simply
@@ -32,10 +34,6 @@ Refer [example](./extras/k3s-in-existing-vpc).
 ### New VPC
 
 Refer [example](./extras/k3s-in-new-vpc).
-
-#### VPC Endpoints
-
-If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work
 
 ## Query helpers
 

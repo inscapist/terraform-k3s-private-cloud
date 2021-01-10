@@ -8,7 +8,7 @@
 
 ## How to use this?
 
-1. Run `terraform init` and `terraform apply` in one of [examples](./examples)
+1. Run `terraform init` and `terraform apply` in one of the [examples](./examples)
 2. Customize the module by referring to [variables.tf](./variables.tf)
 3. Access the master instance with GoSSM or via AWS console
 4. Test `kubectl` and install additional `helm charts`

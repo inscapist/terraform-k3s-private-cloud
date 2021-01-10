@@ -15,17 +15,20 @@
 
 ## Networking
 
-This project is agnostic to network configuration, instead requiring only the subnet_ids to be the input. However, because this project uses Session Manager instead of Bastion, egress connectivity is required and Nat-Gateway(s) should be used.
+This module is designed for workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway.
 
-There are several options:
+For session manager (think of it as bastion) to work however, a nat instance/gateway is needed.
+Example setup can be found in [examples](./examples)
 
-#### Use existing default VPC
+Depending on the use case, there are 2 options to run this:
 
-Create Nat instance
+#### Use an existing VPC
+
+When you do not want to create a new VPC, perhaps because of its overhead.
 
 #### Create a new VPC
 
-Create a new VPC with either:
+For a greenfield project, create a new VPC with either:
 
 - [Terraform AWS VPC](https://github.com/terraform-aws-modules/terraform-aws-vpc)
 - [cloudposse's multi-az-subnets](https://github.com/cloudposse/terraform-aws-multi-az-subnets)

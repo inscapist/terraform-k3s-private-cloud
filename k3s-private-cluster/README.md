@@ -16,8 +16,7 @@
 ## Networking
 
 This module is designed for workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway.
-
-If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work
+If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work.
 
 ### Existing VPC
 
@@ -29,11 +28,11 @@ To run this module, simply
 4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 x num Of AZs
 5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)
 
-Refer [example](./extras/k3s-in-existing-vpc).
+Refer [example](./examples/k3s-in-existing-vpc).
 
 ### New VPC
 
-Refer [example](./extras/k3s-in-new-vpc).
+Refer [example](./examples/k3s-in-new-vpc).
 
 ## Query helpers
 

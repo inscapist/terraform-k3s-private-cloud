@@ -17,6 +17,8 @@
 
 This module is designed for workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway.
 
+#### Existing VPC
+
 To run this module, simply
 
 1. Select the VPC that you wish to deploy k3s in
@@ -24,6 +26,14 @@ To run this module, simply
 3. Specify `cidr_block` of said subnet, which will be further split into public/private subnets
 4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 x numOfAZs
 5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)
+
+Refer [example](./extras/k3s-in-existing-vpc)
+
+#### New VPC
+
+Refer [example](./extras/k3s-in-new-vpc)
+
+#### VPC Endpoints
 
 If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work
 

@@ -9,5 +9,5 @@
 
 ## Tools
 
-- aws-cli [Install here](https://aws.amazon.com/cli/)
-- terraform [Install here](https://www.terraform.io/downloads.html)
+- aws-cli ([install](https://aws.amazon.com/cli/))
+- terraform ([install](https://www.terraform.io/downloads.html))

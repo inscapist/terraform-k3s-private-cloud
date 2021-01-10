@@ -17,21 +17,15 @@
 
 This module is designed for workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway.
 
-For session manager (think of it as bastion) to work however, a nat instance/gateway is needed.
-Example setup can be found in [examples](./examples)
+To run this module, simply
 
-Depending on the use case, there are 2 options to run this:
+1. Select the VPC that you wish to deploy k3s in
+2. Carve out a subnet of the VPC to deploy this in, subnet with 1000 host addr is usually enough
+3. Specify `cidr_block` of said subnet, which will be further split into public/private subnets
+4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 x numOfAZs
+5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)
 
-#### Use an existing VPC
-
-When you do not want to create a new VPC, perhaps because of its overhead.
-
-#### Create a new VPC
-
-For a greenfield project, create a new VPC with either:
-
-- [Terraform AWS VPC](https://github.com/terraform-aws-modules/terraform-aws-vpc)
-- [cloudposse's multi-az-subnets](https://github.com/cloudposse/terraform-aws-multi-az-subnets)
+If you don't need egress connectivity for cluster, then you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work
 
 ## Query helpers
 
@@ -56,4 +50,4 @@ aws ec2 describe-internet-gateways --output=table
 #### Connect to instances with GoSSM
 
 1. Install [gossm](https://github.com/gjbae1212/gossm)
-2.
+2. gossm start

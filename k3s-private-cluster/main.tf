@@ -7,10 +7,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  region = var.region
-}
-
 module "iam_policies" {
   source = "./modules/iam_policies"
 }

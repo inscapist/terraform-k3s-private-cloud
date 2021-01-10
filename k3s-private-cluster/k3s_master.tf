@@ -31,7 +31,7 @@ resource "aws_instance" "k3s_master" {
   instance_type        = var.master_instance_type
   iam_instance_profile = aws_iam_instance_profile.k3s_master.name
 
-  subnet_id                   = local.private_subnets[0]
+  subnet_id                   = local.subnets[0]
   associate_public_ip_address = false
 
   vpc_security_group_ids = concat([

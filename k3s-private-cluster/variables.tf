@@ -8,21 +8,13 @@ variable "region" {
 }
 
 variable "vpc_id" {
-  # if you want to create a new VPC, you can use
-  # https://github.com/cloudposse/terraform-aws-vpc
-  description = "VPC id for this cluster, eg. vpc-xxxxxx. You can create VPC with https://github.com/cloudposse/terraform-aws-vpc"
+  description = "VPC id for this cluster, eg. vpc-xxxxxx"
 }
 
-variable "public_subnets" {
+variable "subnets" {
   default     = []
   type        = list(any)
-  description = "List of public subnet ids to use. If blank, infer from VPC"
-}
-
-variable "private_subnets" {
-  default     = []
-  type        = list(any)
-  description = "List of private subnet ids to use. If blank, infer from VPC"
+  description = "List of subnet ids to deploy in. If blank, infer from VPC"
 }
 
 variable "nat_gateways_subnets" {

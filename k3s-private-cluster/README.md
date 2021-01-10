@@ -20,7 +20,7 @@ This module is designed for workload that runs within private subnet. A private 
 To run this module, simply
 
 1. Select the VPC that you wish to deploy k3s in
-2. Carve out a subnet of the VPC to deploy this in, subnet with 1000 host addr is usually enough
+2. Carve out a subnet of the VPC to deploy this in, a subnet with 1000 host addresses is usually enough
 3. Specify `cidr_block` of said subnet, which will be further split into public/private subnets
 4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 x numOfAZs
 5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)

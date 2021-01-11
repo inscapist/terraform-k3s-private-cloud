@@ -56,19 +56,20 @@ variable "nat_elastic_ips" {
 # Node Instances
 # ----------------------------------------------
 
-variable "master_ami" {
-  description = "AMI for k3s master (defaults to Arm64)"
-  default     = null
-}
-
-variable "node_ami" {
-  description = "AMI for k3s node (defaults to Arm64)"
-  default     = null
-}
 
 variable "master_instance_type" {
-  description = "Instance size for k3s master (defaults to Arm64)"
-  default     = "m6g.medium" # 1vcpu, 4GB memory
+  description = "Instance size for k3s master. Arm64 not supported yet."
+  default     = "t3a.small"
+}
+
+variable "node_instance_arch" {
+  description = "Architecture for k3s instance. Either arm64 or x86_64"
+  default     = "arm64"
+}
+
+variable "node_instance_type" {
+  description = "Instance size for k3s instance, Must match architecture"
+  default     = "r6g.medium" # 1vcpu, 4GB memory
 }
 
 variable "extra_master_security_groups" {

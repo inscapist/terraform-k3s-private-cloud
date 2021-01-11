@@ -30,7 +30,7 @@ module "k3s_master_label" {
   version = "0.22.1"
 
   context = module.this.context
-  name    = "${local.cluster_id}-k3s-master"
+  name    = "${module.this.name}-k3s-master"
   tags = {
     "KubernetesCluster"                         = local.cluster_id,
     "kubernetes.io/cluster/${local.cluster_id}" = "owned"

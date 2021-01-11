@@ -15,7 +15,7 @@ module "k3s-in-existing-vpc" {
 
   # context
   name  = "fetias"
-  stage = "test"
+  stage = "staging"
 
   # networking
   region               = data.aws_region.current.name
@@ -28,5 +28,7 @@ module "k3s-in-existing-vpc" {
   nat_instance_type    = "t3.micro" # 50% cheaper compared to a Nat Gateway
 
   # node instances
-  master_instance_type = "m6g.medium"
+  master_instance_type = "t3a.small"
+  node_instance_arch   = "arm64"
+  node_instance_type   = "r6g.medium"
 }

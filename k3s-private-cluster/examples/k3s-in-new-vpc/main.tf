@@ -11,8 +11,8 @@ module "vpc" {
   version = "0.18.1"
 
   # context
-  name  = "fetias-2"
-  stage = "test"
+  name  = "fetias-new-vpc"
+  stage = "staging"
 
   cidr_block = "172.16.0.0/16"
 }

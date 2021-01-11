@@ -1,4 +1,25 @@
-data "aws_ami" "amazon-linux-2" {
+data "aws_ami" "amz2-x86_64" {
+  most_recent = true
+
+  owners = ["amazon"]
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
+data "aws_ami" "amz2-arm64" {
   most_recent = true
 
   owners = ["amazon"]
@@ -35,8 +56,9 @@ data "template_cloudinit_config" "k3s_server" {
     filename     = "init.cfg"
     content_type = "text/cloud-config"
     content = templatefile("${path.module}/user_data/cloud-config.yaml", {
-      aws_ccm_ds = filebase64("${path.module}/user_data/cloud-provider-aws/aws-cloud-controller-manager-daemonset.yaml"),
-      aws_rbac   = filebase64("${path.module}/user_data/cloud-provider-aws/rbac.yaml")
+      aws_ccm = filebase64("${path.module}/user_data/cloud-provider-aws/aws-ccm.yaml"),
+      # aws_ccm_ds = filebase64("${path.module}/user_data/cloud-provider-aws/aws-cloud-controller-manager-daemonset.yaml"),
+      # aws_rbac   = filebase64("${path.module}/user_data/cloud-provider-aws/rbac.yaml")
     })
   }
 
@@ -56,8 +78,8 @@ locals {
   cluster_id   = module.this.id # unique ID from null label
   master_count = 1
   node_count   = 3
-  master_ami   = var.master_ami != null ? var.master_ami : data.aws_ami.amazon-linux-2.id
-  node_ami     = var.node_ami != null ? var.node_ami : data.aws_ami.amazon-linux-2.id
+  master_ami   = data.aws_ami.amz2-x86_64.id
+  node_ami     = var.node_instance_arch == "arm64" ? data.aws_ami.amz2-arm64.id : data.aws_ami.amz2-x86_64.id
   master_vol   = 50
   node_vol     = 50
 }

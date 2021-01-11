@@ -64,3 +64,9 @@ aws ec2 describe-internet-gateways --output=table
 1. Install [gossm](https://github.com/gjbae1212/gossm)
 2. Enter shell with `gossm start`
 3. Check that kubernetes is running with `kubectl get all --all-namespaces`
+
+## Potential Issues
+
+If you see issues such as "standard_init_linux.go:178: exec user process caused “exec format error”", it may be that the OCI(docker) image is not compiled in the correct architecture:
+
+https://stackoverflow.com/questions/42494853/standard-init-linux-go178-exec-user-process-caused-exec-format-error

@@ -56,9 +56,9 @@ data "template_cloudinit_config" "k3s_server" {
     filename     = "init.cfg"
     content_type = "text/cloud-config"
     content = templatefile("${path.module}/user_data/cloud-config.yaml", {
-      aws_ccm = filebase64("${path.module}/user_data/cloud-provider-aws/aws-ccm.yaml"),
-      # aws_ccm_ds = filebase64("${path.module}/user_data/cloud-provider-aws/aws-cloud-controller-manager-daemonset.yaml"),
-      # aws_rbac   = filebase64("${path.module}/user_data/cloud-provider-aws/rbac.yaml")
+      # aws_ccm = filebase64("${path.module}/user_data/cloud-provider-aws/aws-ccm.yaml"),
+      aws_ccm_ds = filebase64("${path.module}/user_data/cloud-provider-aws/aws-cloud-controller-manager-daemonset.yaml"),
+      aws_rbac   = filebase64("${path.module}/user_data/cloud-provider-aws/rbac.yaml")
     })
   }
 

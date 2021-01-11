@@ -9,27 +9,32 @@ metadata:
 spec:
   selector:
     matchLabels:
-      component: aws-cloud-controller-manager
-      tier: control-plane
+      k8s-app: aws-cloud-controller-manager
   updateStrategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        component: aws-cloud-controller-manager
-        tier: control-plane
+        k8s-app: aws-cloud-controller-manager
     spec:
-      serviceAccountName: cloud-controller-manager
-      hostNetwork: true
       nodeSelector:
-        node-role.kubernetes.io/master: "true"
+        node-role.kubernetes.io/master: "true" # modified for k3s
       tolerations:
         - key: node.cloudprovider.kubernetes.io/uninitialized
           value: "true"
           effect: NoSchedule
         - key: node-role.kubernetes.io/master
-          operator: Exists
+          operator: Exists # modified for k3s
           effect: NoSchedule
+      serviceAccountName: cloud-controller-manager
       containers:
         - name: aws-cloud-controller-manager
-          image: kmcgrath/cloud-provider-aws:latest
+          # may need to be updated from time to time
+          image: gcr.io/k8s-staging-provider-aws/cloud-controller-manager:v1.19.0-alpha.1
+          args:
+            - --v=2
+            - --cloud-provider=aws
+          resources:
+            requests:
+              cpu: 200m
+      hostNetwork: true

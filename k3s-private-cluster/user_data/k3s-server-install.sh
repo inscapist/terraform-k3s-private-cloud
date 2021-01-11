@@ -11,6 +11,7 @@ curl -sfL https://get.k3s.io | sh -s - server \
 	--disable-cloud-controller \
 	--disable servicelb \
 	--disable local-storage \
+	--disable traefik \
 	--node-name="$(hostname -f)" \
 	--kubelet-arg="cloud-provider=external" \
 	--kubelet-arg="provider-id=aws:///$${provider_id}"
@@ -20,9 +21,3 @@ unset K3S_TOKEN
 unset K3S_KUBECONFIG_MODE
 
 echo "K3S Installation successful"
-
-# Install required RBAC
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/cloud-provider-aws/master/manifests/rbac.yaml
-
-# Deploy the cloud-controller-manager to your cluster:
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/cloud-provider-aws/master/manifests/aws-cloud-controller-manager-daemonset.yaml

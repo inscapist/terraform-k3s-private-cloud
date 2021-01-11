@@ -29,8 +29,12 @@ module "k3s_master_label" {
   source  = "cloudposse/label/null"
   version = "0.22.1"
 
-  name    = "${local.cluster_id}-k3s-master"
   context = module.this.context
+  name    = "${local.cluster_id}-k3s-master"
+  tags = {
+    "KubernetesCluster"                         = local.cluster_id,
+    "kubernetes.io/cluster/${local.cluster_id}" = "owned"
+  }
 }
 
 resource "aws_instance" "k3s_master" {
@@ -52,8 +56,8 @@ resource "aws_instance" "k3s_master" {
     encrypted   = true
   }
 
-  # user_data = var.user_data # TODO
-  tags = module.k3s_master_label.tags
+  user_data = data.template_cloudinit_config.k3s_server.rendered
+  tags      = module.k3s_master_label.tags
 
   lifecycle {
     ignore_changes = [

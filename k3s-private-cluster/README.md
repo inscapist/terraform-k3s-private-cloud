@@ -6,6 +6,11 @@
 | --------- | ------- |
 | terraform | >= 0.14 |
 
+You need to install:
+
+- terraform
+- aws-cli and done `aws configure`
+
 ## How to use this?
 
 1. Run `terraform init` and `terraform apply` in one of the [examples](./examples)
@@ -57,4 +62,5 @@ aws ec2 describe-internet-gateways --output=table
 #### Connect to instances with GoSSM
 
 1. Install [gossm](https://github.com/gjbae1212/gossm)
-2. gossm start
+2. Enter shell with `gossm start`
+3. Check that kubernetes is running with `kubectl get all --all-namespaces`

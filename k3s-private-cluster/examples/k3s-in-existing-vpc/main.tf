@@ -29,5 +29,4 @@ module "k3s-in-existing-vpc" {
 
   # node instances
   master_instance_type = "m6g.medium"
-
 }

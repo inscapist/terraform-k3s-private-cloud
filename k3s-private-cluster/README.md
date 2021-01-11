@@ -2,9 +2,10 @@
 
 ## Requirements
 
-| Name      | Version |
-| --------- | ------- |
-| terraform | >= 0.14 |
+| Name      | Version      |
+| --------- | ------------ |
+| terraform | >= 0.14      |
+| SSM Agent | >= 3.0.161.0 |
 
 You need to install:
 
@@ -64,6 +65,8 @@ aws ec2 describe-internet-gateways --output=table
 1. Install [gossm](https://github.com/gjbae1212/gossm)
 2. Enter shell with `gossm start`
 3. Check that kubernetes is running with `kubectl get all --all-namespaces`
+
+Optionally, if you want to use [kubectl aliases](./user_data/env/kubectl_aliases), add `source ~/.bashrc` to SSM Document/Preference. Refer [this](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-preferences-shell-config.html) for more information.
 
 ## Potential Issues
 

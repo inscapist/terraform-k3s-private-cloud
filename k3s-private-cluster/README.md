@@ -25,7 +25,7 @@ This module is designed for workload that runs within private subnet. A private 
 
 If you don't need egress connectivity for cluster, you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work.
 
-Simply specify an unused `cidr_block`, and this module will dynamically create public and private subnets within this block. You do not need to manage subnets.
+Simply specify an unused `cidr_block`, and this module will dynamically create public and private subnets within this block. You _do not_ need to manage subnets.
 
 ### Existing VPC
 

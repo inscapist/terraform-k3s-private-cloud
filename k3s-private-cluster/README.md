@@ -34,7 +34,7 @@ To run this module, simply
 1. Select the VPC that you wish to deploy k3s in
 2. Carve out a subnet of the VPC to deploy this in, a subnet with 1000 host addresses is usually enough
 3. Specify `cidr_block` of said subnet, which will be managed by this module
-4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 x num Of AZs
+4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 times number-of-AZs
 5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)
 
 Refer [example](./examples/k3s-in-existing-vpc).

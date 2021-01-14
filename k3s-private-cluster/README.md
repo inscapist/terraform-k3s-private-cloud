@@ -14,10 +14,13 @@ You need to install:
 
 ## How to use this?
 
-1. Run `terraform init` and `terraform apply` in one of the [examples](./examples)
-2. Customize the module by referring to [variables.tf](./variables.tf)
-3. Access the master instance with GoSSM or via AWS console
-4. Test `kubectl` and install additional `helm charts`
+1. Refer or select one of the [examples](./examples)
+2. Run `terraform init` and `terraform apply`
+3. Customize the module by referring to [variables.tf](./variables.tf)
+4. Access the master instance with GoSSM or via AWS console
+5. Test `kubectl` and install additional `helm charts`
+
+It is also recommended to use a backend to persist state information. Read [here](https://www.terraform.io/docs/backends/types/s3.html)
 
 ## Networking
 

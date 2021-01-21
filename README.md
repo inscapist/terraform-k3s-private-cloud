@@ -64,6 +64,10 @@ aws ec2 describe-subnets --output=table
 aws ec2 describe-internet-gateways --output=table
 ```
 
+## Debug Kubernetes API
+
+Run `kubectl` with `-A -v=10`, where -A refers to "--all-namespaces" and -v=10 refers to log level
+
 ## Access
 
 #### Connect to instances with GoSSM
@@ -73,6 +77,40 @@ aws ec2 describe-internet-gateways --output=table
 3. Check that kubernetes is running with `kubectl get all --all-namespaces`
 
 Optionally, if you want to use [kubectl aliases](./user_data/env/kubectl_aliases), add `source ~/.bashrc` to SSM Document/Preference. Refer [this](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-preferences-shell-config.html) for more information.
+
+## Helm charts
+
+#### Fetch and inspect charts
+
+helm fetch CHART --untar
+
+#### Apply chart
+
+Helm 3 is preinstalled. Just run:
+
+```sh
+helm \
+  --kubeconfig /etc/rancher/k3s/k3s.yaml \
+  install MyChart
+  # your own set flags or -f values.yaml
+```
+
+## Recreate with Terraform Taint
+
+To recreate EC2 instances, first taint it then run `terraform apply`. This is preferrable to mutating ec2 instances in-place
+
+```sh
+# find the module from state
+terraform state list
+
+# then, as an example,
+terraform taint "module.k3s-in-existing-vpc.aws_instance.k3s_node[0]"
+terraform taint "module.k3s-in-existing-vpc.aws_instance.k3s_node[1]"
+terraform taint "module.k3s-in-existing-vpc.aws_instance.k3s_node[2]"
+
+# apply changes
+terraform apply
+```
 
 ## Potential Issues
 

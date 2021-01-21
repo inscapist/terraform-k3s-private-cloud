@@ -115,7 +115,9 @@ terraform taint "module.k3s-in-existing-vpc.aws_instance.k3s_node[2]"
 terraform apply
 ```
 
-## Potential Issues
+## Common Pitfalls
+
+#### Mismatched Container Architecture
 
 If you see issues such as "standard_init_linux.go:178: exec user process caused “exec format error”", it may be that the OCI(docker) image is not compiled in the correct architecture:
 

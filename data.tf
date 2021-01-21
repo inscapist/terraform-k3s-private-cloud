@@ -44,7 +44,15 @@ data "aws_vpc" "this" {
   id = var.vpc_id
 }
 
+data "aws_subnet" "public" {
+  for_each = toset(var.public_subnets)
+  id       = each.key
+}
 
+data "aws_subnet" "private" {
+  for_each = toset(var.private_subnets)
+  id       = each.key
+}
 
 locals {
   cluster_id      = module.this.id # unique ID from null label
@@ -54,5 +62,5 @@ locals {
   node_ami        = var.node_instance_arch == "arm64" ? data.aws_ami.amz2-arm64.id : data.aws_ami.amz2-x86_64.id
   master_vol      = 50
   node_vol        = 50
-  private_subnets = module.subnets.private_subnet_ids
+  private_subnets = var.private_subnets
 }

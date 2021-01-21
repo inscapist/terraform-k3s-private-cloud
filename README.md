@@ -35,10 +35,8 @@ Simply specify an unused `cidr_block`, and this module will dynamically create p
 To run this module, simply
 
 1. Select the VPC that you wish to deploy k3s in
-2. Carve out a subnet of the VPC to deploy this in, a subnet with 1000 host addresses is usually enough
-3. Specify `cidr_block` of said subnet, which will be managed by this module
-4. Specify availability zone(s) to create subnets in. Total subnets created will be 2 times number-of-AZs
-5. Enable either nat gateway (defacto, but more expensive) or nat instance (cheaper)
+2. Carve out a subnet of the VPC to deploy this in. Ensure the cidr range is unused by other sbuynets
+3. Use `cloudposse/dynamic-subnets` to create new additional subnets. This is a cleaner approach
 
 Refer [example](./examples/k3s-in-existing-vpc).
 

@@ -12,44 +12,25 @@ variable "vpc_id" {
   description = "VPC ID where subnets will be created (e.g. `vpc-aceb2723`)"
 }
 
-variable "igw_id" {
-  type        = string
-  description = "Internet Gateway ID the public route table will point to (e.g. `igw-9c26a123`)"
-}
-
-variable "cidr_block" {
-  # You can use this tool to divide subnets
-  # https://network00.com/NetworkTools/IPv4AddressPlanner/
-  type        = string
-  description = "Base CIDR block which will be divided into subnet CIDR blocks (e.g. `10.0.0.0/16`)"
-}
-
 variable "availability_zones" {
   type        = list(string)
   description = "List of Availability Zones where subnets will be created"
 }
 
-variable "nat_gateway_enabled" {
-  # around $30-50/month, varies by regions
-  type        = bool
-  description = "Flag to enable/disable NAT Gateways to allow servers in the private subnets to access the Internet"
-}
-
-variable "nat_instance_enabled" {
-  type        = bool
-  description = "Flag to enable/disable NAT Instances to allow servers in the private subnets to access the Internet"
-}
-
-variable "nat_instance_type" {
-  type        = string
-  description = "NAT Instance type"
-  default     = "t3.micro" # around $15-18/month, vary by regions
-}
-
-variable "nat_elastic_ips" {
+variable "public_subnets" {
   type        = list(string)
-  default     = []
-  description = "Existing Elastic IPs to attach to the NAT Gateway(s) or Instance(s) instead of creating new ones."
+  description = "List of public subnet ids. In which to launch LB"
+}
+
+variable "private_subnets" {
+  type        = list(string)
+  description = "List of private subnet ids. Nodes will be created here"
+}
+
+variable "create_discovery_tags" {
+  type        = bool
+  default     = true
+  description = "Create tags for subnets to be discoverable"
 }
 
 # ----------------------------------------------
@@ -62,13 +43,19 @@ variable "master_instance_type" {
   default     = "t3a.small"
 }
 
+variable "node_count" {
+  description = "Number of worker nodes"
+  default     = 3
+}
+
+
 variable "node_instance_arch" {
-  description = "Architecture for k3s instance. Either arm64 or x86_64"
+  description = "Architecture for k3s instance. Either arm64 (graviton) or x86_64 (intel/amd)"
   default     = "arm64"
 }
 
 variable "node_instance_type" {
-  description = "Instance size for k3s instance, Must match architecture"
+  description = "Instance size for k3s instance, Must match architecture (codename a=arm, g=graviton)"
   default     = "r6g.medium" # 1vcpu, 4GB memory
 }
 

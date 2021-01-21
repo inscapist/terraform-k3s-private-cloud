@@ -74,7 +74,8 @@ Run `kubectl` with `-A -v=10`, where -A refers to "--all-namespaces" and -v=10 r
 
 1. Install [gossm](https://github.com/gjbae1212/gossm)
 2. Enter shell with `gossm start`
-3. Check that kubernetes is running with `kubectl get all --all-namespaces`
+3. Run `source /usr/bin/aliases`
+4. Check that kubernetes is running with `kubectl get all --all-namespaces`
 
 Optionally, if you want to use [kubectl aliases](./user_data/env/kubectl_aliases), add `source ~/.bashrc` to SSM Document/Preference. Refer [this](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-preferences-shell-config.html) for more information.
 
@@ -94,6 +95,8 @@ helm \
   install MyChart
   # your own set flags or -f values.yaml
 ```
+
+If you have already ran `source /usr/bin/aliases`, then you don't need to specify `--kubeconfig` flag.
 
 ## Recreate with Terraform Taint
 

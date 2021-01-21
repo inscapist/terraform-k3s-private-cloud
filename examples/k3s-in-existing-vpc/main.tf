@@ -14,7 +14,7 @@ module "k3s-in-existing-vpc" {
   source = "../.."
 
   # context
-  name  = "fetias"
+  name  = "kay3s"
   stage = "staging"
 
   # networking
@@ -29,6 +29,10 @@ module "k3s-in-existing-vpc" {
 
   # node instances
   master_instance_type = "t3a.small"
-  node_instance_arch   = "arm64"
-  node_instance_type   = "r6g.medium"
+  node_count           = 3
+  node_instance_arch   = "x86_64"
+  node_instance_type   = "t3a.small"
+  # # run on Arm architecture, where g == ARM-based graviton
+  # node_instance_arch   = "arm64"
+  # node_instance_type   = "r6g.medium"
 }

@@ -34,6 +34,36 @@ module "k3s_master_label" {
   tags = {
     "KubernetesCluster"                         = local.cluster_id,
     "kubernetes.io/cluster/${local.cluster_id}" = "owned"
+    "k3s-role"                                  = "master"
+  }
+}
+
+# https://cloudinit.readthedocs.io/en/latest/topics/format.html
+data "template_cloudinit_config" "k3s_master" {
+  gzip          = true
+  base64_encode = true
+
+  # Debug with:
+  # cat /var/log/cloud-init.log
+  part {
+    filename     = "init.cfg"
+    content_type = "text/cloud-config"
+    content = templatefile("${path.module}/user_data/master/cloud-config.yaml", {
+      aws_ccm_ds = filebase64("${path.module}/user_data/master/cloud-provider-aws/aws-cloud-controller-manager-daemonset.yaml"),
+      aws_rbac   = filebase64("${path.module}/user_data/master/cloud-provider-aws/rbac.yaml")
+      aliases    = filebase64("${path.module}/user_data/master/env/aliases")
+    })
+  }
+
+  # Debug with:
+  # cat /tmp/k3s-server-install-debug.log
+  # Generated code can be found in /var/lib/cloud/instance/scripts (for debugging purpose)
+  part {
+    content_type = "text/x-shellscript"
+    content = templatefile("${path.module}/user_data/master/k3s-server-install.sh", {
+      cluster_id    = local.cluster_id,
+      cluster_token = random_password.cluster_token.result,
+    })
   }
 }
 
@@ -43,7 +73,8 @@ resource "aws_instance" "k3s_master" {
   instance_type        = var.master_instance_type
   iam_instance_profile = aws_iam_instance_profile.k3s_master.name
 
-  subnet_id                   = module.subnets.private_subnet_ids[0]
+  # spread instances across subnets
+  subnet_id                   = element(local.private_subnets, count.index)
   associate_public_ip_address = false
 
   vpc_security_group_ids = concat([
@@ -56,7 +87,7 @@ resource "aws_instance" "k3s_master" {
     encrypted   = true
   }
 
-  user_data = data.template_cloudinit_config.k3s_server.rendered
+  user_data = data.template_cloudinit_config.k3s_master.rendered
   tags      = module.k3s_master_label.tags
 
   lifecycle {

@@ -10,18 +10,7 @@ packages:
   - iperf
   - vim
 
-runcmd:
-  - echo "You can add more commands here"
-
 write_files:
-  - encoding: b64
-    path: /home/ssm-user/.kubectl_aliases
-    permission: "0644"
-    content: ${kubectl_aliases}
-  - encoding: b64
-    path: /home/ssm-user/.bashrc
-    permission: "0644"
-    content: ${bashrc}
   - encoding: b64
     path: /var/lib/rancher/k3s/server/manifests/aws-ccm-ds.yaml
     permission: "0644"
@@ -30,3 +19,10 @@ write_files:
     path: /var/lib/rancher/k3s/server/manifests/aws-rbac.yaml
     permission: "0644"
     content: ${aws_rbac}
+  - encoding: b64
+    path: /usr/bin/aliases
+    permission: "0644"
+    content: ${aliases}
+
+runcmd:
+  - echo "You can add more commands here"

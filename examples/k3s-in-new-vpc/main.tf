@@ -21,7 +21,7 @@ module "k3s-in-new-vpc" {
   source = "../.."
 
   # context
-  name  = "fetias-2"
+  name  = "kay3s"
   stage = "test"
 
   # networking
@@ -35,6 +35,11 @@ module "k3s-in-new-vpc" {
   nat_instance_type    = "t3.micro" # 50% cheaper compared to a Nat Gateway
 
   # node instances
-  master_instance_type = "m6g.medium"
-
+  master_instance_type = "t3a.small"
+  node_count           = 3
+  node_instance_arch   = "x86_64"
+  node_instance_type   = "t3a.small"
+  # # run on Arm architecture, where g == ARM-based graviton
+  # node_instance_arch   = "arm64"
+  # node_instance_type   = "r6g.medium"
 }

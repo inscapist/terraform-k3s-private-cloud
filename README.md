@@ -20,9 +20,9 @@ It is also recommended to use a backend to persist state information. Read [here
 - You want a cluster with low maintenance overhead and just works
 - You need a cluster that can be created and destroyed in minutes
 - You want to have this cluster for only 1 or 2 apps (App Clusters)
-- You want to migrate from legacy infrastructure
-- You want to try kubernetes?
+- You want to slowly migrate from legacy infrastructure
 - You are a Nix/Terraform person
+- You want to try kubernetes?
 
 ## Features
 
@@ -30,6 +30,7 @@ It is also recommended to use a backend to persist state information. Read [here
 - Low memory usage and simpler architecture (thanks to K3S)
 - It has most expected features of kubernetes (PVC, LoadBalancer, MetricsServer)
 - Simple codebase with minimal magic
+- Network agnostic with ability to reuse VPC
 
 ## What is this?
 

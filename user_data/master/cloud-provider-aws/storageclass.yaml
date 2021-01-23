@@ -1,0 +1,14 @@
+# To understand the basics,
+# https://kubernetes.io/docs/concepts/storage/storage-classes/
+#
+# To know about the CSI provisioner,
+# https://github.com/kubernetes-sigs/aws-ebs-csi-driver
+
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Retain # for peace-of-mind and not a piece of your boss's mind, do this manually

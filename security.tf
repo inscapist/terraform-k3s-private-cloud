@@ -10,7 +10,11 @@ resource "aws_security_group" "self" {
     self      = true
   }
 
-  tags = module.this.tags
+  tags = merge(module.this.tags, {
+    # required for load balancer, see:
+    # https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
+    "kubernetes.io/cluster/${local.cluster_id}" = "owned"
+  })
 }
 
 resource "aws_security_group" "egress" {

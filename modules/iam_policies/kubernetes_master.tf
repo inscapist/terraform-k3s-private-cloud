@@ -9,24 +9,16 @@ data "aws_iam_policy_document" "k8s_master_full" {
       "autoscaling:DescribeAutoScalingGroups",
       "autoscaling:DescribeLaunchConfigurations",
       "autoscaling:DescribeTags",
-      "ec2:DescribeInstances",
       "ec2:DescribeRegions",
       "ec2:DescribeRouteTables",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeSubnets",
-      "ec2:DescribeVolumes",
       "ec2:CreateSecurityGroup",
-      "ec2:CreateTags",
-      "ec2:CreateVolume",
       "ec2:ModifyInstanceAttribute",
-      "ec2:ModifyVolume",
-      "ec2:AttachVolume",
       "ec2:AuthorizeSecurityGroupIngress",
       "ec2:CreateRoute",
       "ec2:DeleteRoute",
       "ec2:DeleteSecurityGroup",
-      "ec2:DeleteVolume",
-      "ec2:DetachVolume",
       "ec2:RevokeSecurityGroupIngress",
       "ec2:DescribeVpcs",
       "elasticloadbalancing:AddTags",
@@ -60,7 +52,25 @@ data "aws_iam_policy_document" "k8s_master_full" {
       "elasticloadbalancing:DeregisterTargets",
       "elasticloadbalancing:SetLoadBalancerPoliciesOfListener",
       "iam:CreateServiceLinkedRole",
-      "kms:DescribeKey"
+      "kms:DescribeKey",
+
+      # For EBS CSI Driver
+      # https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-iam-policy.json
+      "ec2:AttachVolume",
+      "ec2:CreateSnapshot",
+      "ec2:CreateTags",
+      "ec2:CreateVolume",
+      "ec2:DeleteSnapshot",
+      "ec2:DeleteTags",
+      "ec2:DeleteVolume",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeInstances",
+      "ec2:DescribeSnapshots",
+      "ec2:DescribeTags",
+      "ec2:DescribeVolumes",
+      "ec2:DescribeVolumesModifications",
+      "ec2:DetachVolume",
+      "ec2:ModifyVolume"
     ]
 
     resources = [

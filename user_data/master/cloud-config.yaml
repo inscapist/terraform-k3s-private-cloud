@@ -27,6 +27,10 @@ write_files:
     permission: "0644"
     content: ${aws_rbac}
   - encoding: b64
+    path: /var/lib/rancher/k3s/server/manifests/storageclass.yaml
+    permission: "0644"
+    content: ${storageclass}
+  - encoding: b64
     path: /usr/bin/aliases
     permission: "0644"
     content: ${aliases}

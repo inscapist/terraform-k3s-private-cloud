@@ -17,6 +17,7 @@ data "aws_iam_policy_document" "k8s_node_full" {
       "ecr:BatchGetImage",
 
       # For EBS CSI Driver
+      # https://github.com/kubernetes-sigs/aws-ebs-csi-driver/blob/master/docs/example-iam-policy.json
       "ec2:AttachVolume",
       "ec2:CreateSnapshot",
       "ec2:CreateTags",
@@ -24,10 +25,12 @@ data "aws_iam_policy_document" "k8s_node_full" {
       "ec2:DeleteSnapshot",
       "ec2:DeleteTags",
       "ec2:DeleteVolume",
+      "ec2:DescribeAvailabilityZones",
       "ec2:DescribeInstances",
       "ec2:DescribeSnapshots",
       "ec2:DescribeTags",
       "ec2:DescribeVolumes",
+      "ec2:DescribeVolumesModifications",
       "ec2:DetachVolume",
       "ec2:ModifyVolume"
     ]

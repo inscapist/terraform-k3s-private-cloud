@@ -7,12 +7,7 @@
 | terraform | >= 0.14      |
 | SSM Agent | >= 3.0.161.0 |
 
-You need to install:
-
-- terraform
-- aws-cli and done `aws configure`
-
-It is also recommended to use a backend to persist state information. Read [here](https://www.terraform.io/docs/backends/types/s3.html)
+This module is published at [Terraform registry](https://registry.terraform.io/modules/sagittaros/private-cloud/k3s/latest)
 
 ## Why?
 

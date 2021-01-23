@@ -9,15 +9,17 @@
 
 This module is published at [Terraform registry](https://registry.terraform.io/modules/sagittaros/private-cloud/k3s/latest)
 
-## Why?
+## Why would you want this?
 
 - You are cost-conscious. RDS, Elasticache and EKS are too expensive and perhaps even too complicated
 - You want a cluster with low maintenance overhead and just works
-- You need a cluster that can be created and destroyed in minutes
 - You want to have this cluster for only 1 or 2 apps (App Clusters)
-- You want to slowly migrate from legacy infrastructure
-- You are a Nix/Terraform person
-- You want to try kubernetes?
+
+## Why would I do this?
+
+- I wish to empower individual developers to have their own test/staging environment
+- Big clusters fail, coordination is hard, service mesh is expensive
+- I wish our code can simply run anywhere on any cloud, even if its stateful
 
 ## Features
 

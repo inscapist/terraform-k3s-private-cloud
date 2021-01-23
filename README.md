@@ -35,6 +35,8 @@ This module is designed for kubernetes workload that runs within private subnet.
 
 If you don't need egress connectivity for cluster, you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work.
 
+This module currently supports only AWS cloud. However, I wish to support more clouds with minimal differences between API.
+
 Various networking configurations are demonstrated in the following examples:
 
 - [New VPC](./examples/k3s-in-new-vpc)

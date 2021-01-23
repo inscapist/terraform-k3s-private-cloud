@@ -22,6 +22,14 @@ It is also recommended to use a backend to persist state information. Read [here
 - You want to have this cluster for only 1 or 2 apps (App Clusters)
 - You want to migrate from legacy infrastructure
 - You want to try kubernetes?
+- You are a Nix/Terraform person
+
+## Features
+
+- Private cluster with no exposed ports
+- Low memory usage and simpler architecture (thanks to K3S)
+- It has most expected features of kubernetes (PVC, LoadBalancer, MetricsServer)
+- Simple codebase with minimal magic
 
 ## What is this?
 

@@ -32,7 +32,7 @@ Refer [example](./examples/k3s-in-new-vpc).
 #### Access kubernetes locally
 
 1. [Install](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) SSM plugin on your local machine
-2. And within the shell, copy the content of `/etc/rancher/k3s/k3s.yaml` to your local path, eg:
+2. Copy the content of `/etc/rancher/k3s/k3s.yaml` to your local path, eg:
 
 ```sh
 gossm cmd -e "cat /etc/rancher/k3s/k3s.yaml"

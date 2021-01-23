@@ -14,9 +14,18 @@ You need to install:
 
 It is also recommended to use a backend to persist state information. Read [here](https://www.terraform.io/docs/backends/types/s3.html)
 
+## Why?
+
+- You are cost-conscious. RDS, Elasticache and EKS are too expensive and perhaps even too complicated
+- You want a cluster with low maintenance overhead and just works
+- You need a cluster that can be created and destroyed in minutes
+- You want to have this cluster for only 1 or 2 apps (App Clusters)
+- You want to migrate from legacy infrastructure
+- You want to try kubernetes?
+
 ## What is this?
 
-This module is designed for kubernetes workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway. This results in lower cost and barrier, as you do not need to purchase a domain name, certificate and manage perimeter security.
+This module is designed for kubernetes workload that runs within private subnet. A private subnet is simply a subnet not associated with an internet gateway. This results in lower cost and reduction in moving parts, as you do not need to purchase a domain name, certificate and manage perimeter security.
 
 If you don't need egress connectivity for cluster, you can use the [VPC endpoints for SSM](./extras/ssm_vpc_endpoints). Otherwise, session manager would not work.
 

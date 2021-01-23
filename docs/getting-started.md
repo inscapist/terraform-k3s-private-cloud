@@ -3,7 +3,7 @@
 ## How do I use this?
 
 1. Refer or select one of the [examples](./examples)
-2. Customize the module by referring to [variables.tf](./variables.tf)
+2. Customize the module by referring to their `variables.tf`
 3. Access the master instance with GoSSM or via AWS console, or by Port Tunneling `:6443`
 
 ### Existing VPC

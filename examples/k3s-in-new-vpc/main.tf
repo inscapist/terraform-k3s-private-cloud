@@ -28,6 +28,7 @@ module "vpc" {
   }
 }
 
+# # If you prefer to use spot-instances for NAT, use this
 # # You don't need this if nat_gateway is enabeld
 # module "nat" {
 #   source = "int128/nat-instance/aws"
@@ -40,7 +41,8 @@ module "vpc" {
 # }
 
 module "k3s-in-new-vpc" {
-  source = "../.."
+  # source = "../.."
+  source = "sagittaros/private-cloud/k3s"
 
   # context
   name  = "k3s"

@@ -30,7 +30,8 @@ module "subnets" {
 }
 
 module "k3s-in-existing-vpc" {
-  source = "../.."
+  # source = "../.."
+  source = "sagittaros/private-cloud/k3s"
 
   # context
   name  = "kay3s"

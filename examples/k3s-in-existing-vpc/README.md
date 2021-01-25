@@ -9,3 +9,11 @@ terraform init
 terraform apply -target=module.subnets
 terraform apply
 ```
+
+## Partial destroy kubernetes cluster
+
+It is not necessary to recreate VPC during experimentation. We can specify `target` to destroy only the kubernetes cluster
+
+```sh
+terraform destroy -target=module.k3s-in-existing-vpc
+```

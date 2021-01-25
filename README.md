@@ -1,5 +1,7 @@
 # K3s Private Cluster
 
+[![asciicast](https://asciinema.org/a/386827.svg)](https://asciinema.org/a/386827?t=2:30)
+
 ## Requirements
 
 | Name      | Version      |

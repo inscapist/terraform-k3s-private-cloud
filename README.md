@@ -2,6 +2,8 @@
 
 [![asciicast](https://asciinema.org/a/386840.svg)](https://asciinema.org/a/386840)
 
+Asciicast for accessing cluster can be viewed [here](./docs/getting-started.md)
+
 ## Requirements
 
 | Name      | Version      |

@@ -54,3 +54,5 @@ aws ssm start-session \
 
 5. Activate the kubeconfig with `export KUBECONFIG="$(pwd)/k3s.yaml"`
 6. Access the cluster, eg: `kubectl get all -A`
+
+[![asciicast](https://asciinema.org/a/386844.svg)](https://asciinema.org/a/386844)

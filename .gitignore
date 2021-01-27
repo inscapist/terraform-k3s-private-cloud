@@ -34,3 +34,5 @@ override.tf.json
 terraform.rc
 
 playground
+
+.terraform.lock.hcl

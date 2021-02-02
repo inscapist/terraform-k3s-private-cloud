@@ -68,6 +68,7 @@ resource "aws_instance" "k3s_node" {
 
   vpc_security_group_ids = concat([
     aws_security_group.self.id,
+    aws_security_group.node_ports.id,
     aws_security_group.egress.id
   ], var.extra_node_security_groups)
 

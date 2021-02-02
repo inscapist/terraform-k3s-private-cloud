@@ -17,7 +17,7 @@ resource "aws_security_group" "self" {
   })
 }
 
-resource "aws_security_group" "node-ports" {
+resource "aws_security_group" "node_ports" {
   name        = "${local.cluster_id}-node-ports"
   vpc_id      = data.aws_vpc.this.id
   description = "Allow node ports to be discovered"

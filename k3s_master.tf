@@ -79,6 +79,7 @@ resource "aws_instance" "k3s_master" {
   user_data = data.cloudinit_config.k3s_master.rendered
 
   tags = {
+    "Name"                                      = "${local.cluster_id}-master",
     "KubernetesCluster"                         = local.cluster_id,
     "kubernetes.io/cluster/${local.cluster_id}" = "owned"
     "k3s-role"                                  = "master"

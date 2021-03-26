@@ -58,7 +58,8 @@ module "k3s-in-new-vpc" {
   master_instance_type = "t3a.small"
   node_count           = 3
   node_instance_arch   = "x86_64"
-  node_instance_type   = "t3a.small"
+  node_instance_types  = ["t3a.small", "t3.small"]
+  on_demand_percentage = 0 # all spot instances
 
   # # run on Arm architecture, where g == ARM-based graviton
   # node_instance_arch   = "arm64"

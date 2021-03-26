@@ -54,13 +54,3 @@ data "aws_subnet" "private" {
   id       = each.key
 }
 
-locals {
-  cluster_id      = var.cluster_id
-  master_count    = 1
-  node_count      = var.node_count
-  master_ami      = data.aws_ami.amz2-x86_64.id
-  node_ami        = var.node_instance_arch == "arm64" ? data.aws_ami.amz2-arm64.id : data.aws_ami.amz2-x86_64.id
-  master_vol      = 50
-  node_vol        = 50
-  private_subnets = var.private_subnets
-}

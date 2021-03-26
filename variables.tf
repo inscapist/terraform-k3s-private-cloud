@@ -56,9 +56,12 @@ variable "node_instance_arch" {
   default     = "arm64"
 }
 
-variable "node_instance_type" {
+variable "node_instance_types" {
+  type        = list(string)
   description = "Instance size for k3s instance, Must match architecture (codename a=arm, g=graviton)"
-  default     = "r6g.medium" # 1vcpu, 4GB memory
+  default = [
+    "r6g.medium", # 1vcpu, 4GB memory
+  ]
 }
 
 variable "extra_master_security_groups" {
@@ -73,3 +76,14 @@ variable "extra_node_security_groups" {
   description = "Additional security groups to attach to k3s agent instances"
 }
 
+variable "on_demand_percentage" {
+  default     = 100
+  type        = number
+  description = "Percentage(ratio) of on-demand against spot instances (0-100)"
+}
+
+variable "target_group_arns" {
+  type        = list(string)
+  description = "Attach worker nodes to a list of target groups. (Needed for exposure)"
+  default     = []
+}

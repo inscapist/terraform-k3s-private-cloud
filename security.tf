@@ -10,11 +10,17 @@ resource "aws_security_group" "self" {
     self      = true
   }
 
-  tags = merge(module.this.tags, {
+  tags = {
     # required for load balancer, see:
     # https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html
     "kubernetes.io/cluster/${local.cluster_id}" = "owned"
-  })
+  }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 resource "aws_security_group" "node_ports" {
@@ -41,7 +47,4 @@ resource "aws_security_group" "egress" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
-  tags = module.this.tags
 }
-

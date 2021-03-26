@@ -1,11 +1,19 @@
 provider "aws" {
   region  = "ap-southeast-1" # change this
   profile = "default"        # can be changed to other profile
+
+  ignore_tags {
+    # required to prevent tag from messing terraform state
+    key_prefixes = ["kubernetes.io"]
+  }
 }
 
 data "aws_region" "current" {}
 data "aws_availability_zones" "all" {}
 
+# ----------------------------------------------
+# Networking
+# ----------------------------------------------
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -21,40 +29,30 @@ module "vpc" {
 
   # optionally,
   enable_nat_gateway = true
-  single_nat_gateway = true # or maybe you got money to burn?
+  single_nat_gateway = true # perhaps you got money to burn?
 
   tags = {
-    Stage = "test"
+    "Name" = "my-k3s-vpc"
   }
 }
 
-# # If you prefer to use spot-instances for NAT, use this
-# # You don't need this if nat_gateway is enabeld
-# module "nat" {
-#   source = "int128/nat-instance/aws"
-
-#   name                        = "k3s_nat"
-#   vpc_id                      = module.vpc.vpc_id
-#   public_subnet               = module.vpc.public_subnets[0]
-#   private_subnets_cidr_blocks = module.vpc.private_subnets_cidr_blocks
-#   private_route_table_ids     = module.vpc.private_route_table_ids
-# }
+# ----------------------------------------------
+# Main module
+# ----------------------------------------------
 
 module "k3s-in-new-vpc" {
-  # source = "../.."
-  source = "sagittaros/private-cloud/k3s"
+  source = "../.."
+  # source = "sagittaros/private-cloud/k3s"
 
-  # context
-  name  = "k3s"
-  stage = "test"
+  # main
+  cluster_id = "k3s-in-new-vpc"
 
   # networking
-  region                = data.aws_region.current.name
-  availability_zones    = data.aws_availability_zones.all.names
-  vpc_id                = module.vpc.vpc_id
-  public_subnets        = module.vpc.public_subnets
-  private_subnets       = module.vpc.private_subnets
-  create_discovery_tags = true
+  region             = data.aws_region.current.name
+  availability_zones = data.aws_availability_zones.all.names
+  vpc_id             = module.vpc.vpc_id
+  public_subnets     = module.vpc.public_subnets
+  private_subnets    = module.vpc.private_subnets
 
   # node instances
   master_instance_type = "t3a.small"

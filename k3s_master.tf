@@ -25,21 +25,8 @@ resource "aws_iam_instance_profile" "k3s_master" {
   role = aws_iam_role.k3s_master.name
 }
 
-module "k3s_master_label" {
-  source  = "cloudposse/label/null"
-  version = "0.22.1"
-
-  context = module.this.context
-  name    = "${module.this.name}-k3s-master"
-  tags = {
-    "KubernetesCluster"                         = local.cluster_id,
-    "kubernetes.io/cluster/${local.cluster_id}" = "owned"
-    "k3s-role"                                  = "master"
-  }
-}
-
 # https://cloudinit.readthedocs.io/en/latest/topics/format.html
-data "template_cloudinit_config" "k3s_master" {
+data "cloudinit_config" "k3s_master" {
   gzip          = true
   base64_encode = true
 
@@ -89,13 +76,20 @@ resource "aws_instance" "k3s_master" {
     encrypted   = true
   }
 
-  user_data = data.template_cloudinit_config.k3s_master.rendered
-  tags      = module.k3s_master_label.tags
+  user_data = data.cloudinit_config.k3s_master.rendered
+
+  tags = {
+    "KubernetesCluster"                         = local.cluster_id,
+    "kubernetes.io/cluster/${local.cluster_id}" = "owned"
+    "k3s-role"                                  = "master"
+  }
 
   lifecycle {
     ignore_changes = [
       ami,       # new ami changes by amazon should not affect change to this instance
       user_data, # https://github.com/hashicorp/terraform-provider-aws/issues/4954
+      tags,
+      volume_tags,
     ]
   }
 }

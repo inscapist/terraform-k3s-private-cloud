@@ -55,7 +55,7 @@ data "aws_subnet" "private" {
 }
 
 locals {
-  cluster_id      = module.this.id # unique ID from null label
+  cluster_id      = var.cluster_id
   master_count    = 1
   node_count      = var.node_count
   master_ami      = data.aws_ami.amz2-x86_64.id

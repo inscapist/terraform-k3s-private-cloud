@@ -1,4 +1,13 @@
 # ----------------------------------------------
+# Main
+# ----------------------------------------------
+
+variable "cluster_id" {
+  type        = string
+  description = "Unique cluster ID"
+}
+
+# ----------------------------------------------
 # Networking
 # ----------------------------------------------
 
@@ -27,12 +36,6 @@ variable "private_subnets" {
   description = "List of private subnet ids. Nodes will be created here"
 }
 
-variable "create_discovery_tags" {
-  type        = bool
-  default     = true
-  description = "Create tags for subnets to be discoverable"
-}
-
 # ----------------------------------------------
 # Node Instances
 # ----------------------------------------------
@@ -47,7 +50,6 @@ variable "node_count" {
   description = "Number of worker nodes"
   default     = 3
 }
-
 
 variable "node_instance_arch" {
   description = "Architecture for k3s instance. Either arm64 (graviton) or x86_64 (intel/amd)"
@@ -71,46 +73,3 @@ variable "extra_node_security_groups" {
   description = "Additional security groups to attach to k3s agent instances"
 }
 
-# ----------------------------------------------
-# Additional naming context with:
-# https://github.com/cloudposse/terraform-null-label
-# ----------------------------------------------
-
-variable "namespace" {
-  type        = string
-  default     = null
-  description = "Namespace, which could be your organization name or abbreviation, e.g. 'eg' or 'cp'"
-}
-
-variable "environment" {
-  type        = string
-  default     = null
-  description = "Environment, e.g. 'uw2', 'us-west-2', OR 'prod', 'staging', 'dev', 'UAT'"
-}
-
-variable "stage" {
-  type        = string
-  default     = null
-  description = "Stage, e.g. 'prod', 'staging', 'dev', OR 'source', 'build', 'test', 'deploy', 'release'"
-}
-
-variable "name" {
-  type        = string
-  default     = null
-  description = "Solution name, e.g. 'app' or 'jenkins'"
-}
-
-variable "delimiter" {
-  type        = string
-  default     = null
-  description = <<-EOT
-    Delimiter to be used between `namespace`, `environment`, `stage`, `name` and `attributes`.
-    Defaults to `-` (hyphen). Set to `""` to use no delimiter at all.
-  EOT
-}
-
-variable "tags" {
-  type        = map(string)
-  default     = {}
-  description = "Additional tags (e.g. `map('BusinessUnit','XYZ')`"
-}

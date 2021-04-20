@@ -1,4 +1,12 @@
-# Volume Expansion
+# Volume
+
+## Make `ebs-sc` default storageclass
+
+```sh
+kubectl patch storageclass ebs-sc -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+## Volume Expansion
 
 This kubernetes distribution supports Volume Expansion.
 

@@ -22,6 +22,10 @@ locals {
     "KubernetesCluster"                       = var.cluster_id
     "kubernetes.io/cluster/${var.cluster_id}" = "owned"
     "k3s-role"                                = "node"
+
+    # supports cluster autoscaler by default
+    "k8s.io/cluster-autoscaler/enabled"           = 1
+    "k8s.io/cluster-autoscaler/${var.cluster_id}" = "owned"
   }
 
 }

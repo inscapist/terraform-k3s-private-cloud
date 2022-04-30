@@ -12,7 +12,7 @@
 To run this module, simply
 
 1. Select the VPC that you wish to deploy k3s in
-2. Carve out a subnet of the VPC to deploy this in. Ensure the cidr range is unused by other sbuynets
+2. Carve out a subnet of the VPC to deploy this in. Ensure the cidr range is unused by other subnets
 3. Use `cloudposse/dynamic-subnets` to create new additional subnets. This is a cleaner approach
 
 Refer [example](../examples/k3s-in-existing-vpc).

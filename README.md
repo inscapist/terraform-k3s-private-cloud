@@ -29,7 +29,7 @@ This module is published at [Terraform registry](https://registry.terraform.io/m
 
 - Private cluster with no exposed ports
 - Low memory usage and simpler architecture (thanks to K3S)
-- It has most expected features of kubernetes (PVC, LoadBalancer, MetricsServer)
+- It has most of the expected features of kubernetes (PVC, LoadBalancer, MetricsServer)
 - Simple codebase with minimal magic
 - Network agnostic with ability to reuse VPC
 
